@@ -29,13 +29,45 @@ public class Main {
                 words[rows][i] = array[i];
             }
             rows++;
-            scanner.close();
+
+            for (int i = rows; i < words.length; i++) {
+                words[i] = new String[0];
+            }
             /*for(String splitWords: array){
                 System.out.println(splitWords);
             }*/
+
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < words[i].length; j++) {
+                    if (words[i][j].equalsIgnoreCase("you")) {
+
+                        firstOccurence("do",words);
+                        System.out.println("Found 'you' at line " + (i + 1) + ", word " + (j + 1));
+
+                    }
+                }
+            }
+        }
+        scanner.close();
+        String searchWord = "do";
+        String result = firstOccurence(searchWord, words);
+        if (!result.equals("Word 'do' not found.")) {
+            System.out.println(result);
         }
 
 
 
+
+    }
+
+    public static String firstOccurence(String string,String[][] words){
+        for (int i=0;i< words.length;i++){
+            for (int j=0;j<words[i].length;j++){
+                if (words[i][j].equalsIgnoreCase(string)){
+                    return "First occurence of" + string + " found at line " + (i+1) + ", word " + (j + 1);
+                }
+            }
+        }
+        return "Word '" + string + "' not found.";
     }
 }
